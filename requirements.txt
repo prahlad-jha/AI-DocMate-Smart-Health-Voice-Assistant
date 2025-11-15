@@ -1,0 +1,15 @@
+gradio
+groq
+SpeechRecognition
+python-dotenv
+gradio>=3.0
+groq
+SpeechRecognition
+python-dotenv
+gtts
+pygame
+elevenlabs
+pydub
+pyaudio
+Pillow
+pygame
