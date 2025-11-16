@@ -16,8 +16,13 @@ from groq import Groq
 query="is there something wrong with my face?"
 model="llama-3.2-90b-vision-preview"
 def analyse_image_with_query(query, model, encoded_image):
+    # Ensure query is a string
+    if not isinstance(query, str):
+        query = str(query)
+    
     client = Groq()
     
+    # Use proper vision model format for Groq
     messages = [
         {
             "role": "user",
@@ -36,9 +41,23 @@ def analyse_image_with_query(query, model, encoded_image):
         }
     ]
     
-    chat_completion = client.chat.completions.create(
-        messages=messages,
-        model=model
-    )
-    
-    return chat_completion.choices[0].message.content  # <-- Fixed indentation & return statement
+    try:
+        chat_completion = client.chat.completions.create(
+            messages=messages,
+            model=model
+        )
+        return chat_completion.choices[0].message.content
+    except Exception as e:
+        # If vision format fails, try text-only format as fallback
+        print(f"Vision API error: {e}. Trying text-only fallback...")
+        messages_text_only = [
+            {
+                "role": "user",
+                "content": query
+            }
+        ]
+        chat_completion = client.chat.completions.create(
+            messages=messages_text_only,
+            model=model
+        )
+        return chat_completion.choices[0].message.content

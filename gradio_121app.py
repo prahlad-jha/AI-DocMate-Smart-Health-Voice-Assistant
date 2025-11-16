@@ -79,11 +79,23 @@ def process_inputs(audio_filepath, image_filepath):
         if image_filepath:
             # choose model: prefer environment override, then brain_of_the_doctor default
             model_to_use = os.environ.get('GROQ_IMAGE_MODEL') or getattr(bod, 'model', 'llama-3.2-90b-vision-preview')
-            doctor_response = analyse_image_with_query(
-                query=system_prompt + speech_to_text_output,
-                encoded_image=encode_image(image_filepath),
-                model=model_to_use
-            )
+            try:
+                doctor_response = analyse_image_with_query(
+                    query=system_prompt + speech_to_text_output,
+                    model=model_to_use,
+                    encoded_image=encode_image(image_filepath)
+                )
+            except Exception as img_error:
+                print(f"Image analysis error: {img_error}")
+                # Fallback: analyze without image
+                from groq import Groq
+                client = Groq()
+                fallback_messages = [{"role": "user", "content": system_prompt + speech_to_text_output}]
+                fallback_response = client.chat.completions.create(
+                    messages=fallback_messages,
+                    model="mixtral-8x7b-32768"
+                )
+                doctor_response = fallback_response.choices[0].message.content
         else:
             doctor_response = "No image provided for analysis."
 
