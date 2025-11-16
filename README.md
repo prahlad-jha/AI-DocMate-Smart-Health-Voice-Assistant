@@ -3,7 +3,7 @@ A smart AI-powered healthcare assistant that combines **vision analysis**, **voi
 
 🚀 **Live Demo (Hugging Face Space):**  
 🔗 [https://huggingface.co/spaces/YOUR-SPACE-LINK ](https://huggingface.co/spaces/PRAhlad9818/ai-doctor) 
-*(Replace with your real deployed link)*
+
 
 ---
 
@@ -59,4 +59,5 @@ A smart AI-powered healthcare assistant that combines **vision analysis**, **voi
 ```bash
 git clone https://github.com/prahlad-jha/AI-DocMate-Smart-Health-Voice-Assistant.git
 cd AI-DocMate-Smart-Health-Voice-Assistant
+
 
