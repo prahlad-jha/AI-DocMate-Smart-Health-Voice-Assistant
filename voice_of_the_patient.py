@@ -37,8 +37,6 @@ def record_audio(file_path, timeout=20, phrase_time_limit=None):
 
     except Exception as e:
         logging.error(f"An error occurred: {e}")
-audio_filepath="patient_voice_test.mp3"
-record_audio(file_path=audio_filepath)
 
 #s-2 speech to text model-STT-model for transcription
 import os
