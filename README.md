@@ -58,6 +58,4 @@ A smart AI-powered healthcare assistant that combines **vision analysis**, **voi
 ### 1️⃣ Clone Repository
 ```bash
 git clone https://github.com/prahlad-jha/AI-DocMate-Smart-Health-Voice-Assistant.git
-cd AI-DocMate-Smart-Health-Voice-Assistant
-
-
+cd AI-DocMate-Smart-Health-Voice-Assi
